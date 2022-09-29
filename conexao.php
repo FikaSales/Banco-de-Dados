@@ -1,11 +1,12 @@
+<!-- Conexão com servidor MYsql -->
+
 <?php
 
 $servidor = "localhost";
 $user = "root";
 $senha = "";
-$bancodedados = "professores";
+$bancodados = "alunos";
 
-$conexao = new mysqli($servidor, $user, $senha, $bancodedados);
-
+$conexao = new mysqli($servidor,$user,$senha,$bancodados)
 
 ?>
