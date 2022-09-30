@@ -25,11 +25,7 @@ if(isset($_POST['submit'])){
   $resultado = $conexao->query($sql);  
 
 }
-
 ?>
-
-
-
 
 
 

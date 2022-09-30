@@ -14,7 +14,13 @@ if(isset($_SESSION['login']) and isset($_SESSION['senha'])){
 //   unset($_SESSION['senha']);
 // }
 
-$sql="SELECT * FROM alunos ORDER BY nome ASC"; // mostra todos os alunos em ordem crescente
+if(!empty($_GET['search'])){ // diferente de vazio no input de busca
+  $search=$_GET['search'];
+  $sql="SELECT * FROM alunos WHERE nome LIKE '%$search%' ORDER BY nome ASC";
+}else{
+  $sql="SELECT * FROM alunos ORDER BY nome ASC"; // mostra todos os alunos em ordem crescente
+}
+
 $resultado = $conexao->query($sql); // executa a consulta do banco.
 ?>
 
@@ -35,16 +41,21 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
   <style>
 
     header h1{
+      display: flex;
       font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
       font-weight: 600;
       color: orange;
+      gap: 50px;
+    }
+    header form{
+      display: flex;
+      gap: 2px;
     }
     .topo {
       color: white;
       display: flex;
       justify-content: space-around;
-
-
+      padding: 10px  ;
     }
 
     body {
@@ -81,9 +92,14 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
     <a href="index.html"><img src="img/icons8-mulher-estudante-48.png" alt="icon"></a>
 
 
-    <h1>SISTEMA DE CADASTRO ESCOLAR <br> <?php
+    <h1>SISTEMA DE CADASTRO ESCOLAR <br>
+     <!-- <?php
     echo "Bem vindo ".$login;
-    ?></h1>
+    ?></h1> -->
+    <form class="form-inline" action="sistema.php" method="$_GET">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+    <button class="btn btn-warning my-2 my-sm-0" type="submit" name="submit">Search</button>
+    </form>
 
     <a href="sair.php"><button class="btn btn-warning">Sair</button></a>
     
