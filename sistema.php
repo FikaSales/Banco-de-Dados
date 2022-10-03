@@ -58,16 +58,12 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
       padding: 10px  ;
     }
 
-    body {
-      height: 100vh;
-
-    }
 
     main {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 80vh;
+      height: auto;
     }
 
     .box {
@@ -76,6 +72,7 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
       padding: 20px;
       width: auto;
       display: flex;
+      margin-top: 50px;
       justify-content: space-around;
     }
     .table{
@@ -96,7 +93,7 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
      <!-- <?php
     echo "Bem vindo ".$login;
     ?></h1> -->
-    <form class="form-inline" action="sistema.php" method="$_GET">
+    <form class="form-inline" action="sistema.php" method="GET">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
     <button class="btn btn-warning my-2 my-sm-0" type="submit" name="submit">Search</button>
     </form>
@@ -119,6 +116,8 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
       <th scope="col">Data Nascimento</th>
       <th scope="col">Escolaridade</th>
       <th scope="col">Telefone</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -134,6 +133,9 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
           echo"<td>".$alunos['data_nasc']."</td>";
           echo"<td>".$alunos['escolaridade']."</td>";
           echo"<td>".$alunos['telefone']."</td>";
+          echo"<td><a class='btn btn-sm btn-warning' href='edit.php?id=$alunos[id]'><img src='imagens/pencil-fill.svg'>"."</a></td>";
+          echo"<td><a class='btn btn-sm btn-danger' href='delete.php?id=$alunos[id]'><img src='imagens/trash-fill.svg'>"."</a></td>";
+          
         echo "</tr>";
       }
 

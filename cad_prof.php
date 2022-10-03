@@ -91,7 +91,7 @@ if(isset($_POST['submit'])){
   <option value="matematica">Matemarica</option>
   <option value="geografia">Geografia</option>
   <option value="historia">Historia</option>
-</select>
+  </select>
 
   
   <button  type="submit" class="btn btn-primary my-5 " name="submit">Cadastrar</button>

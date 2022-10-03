@@ -1,6 +1,6 @@
 <?php
 
-session_start(); // inicia todas as paginas e variavéis de inserção.
+//session_start(); // inicia todas as paginas e variavéis de inserção.
 include_once 'conexao.php'; //inclusao do arq conexo no sistema
 
 // else {
@@ -9,9 +9,26 @@ include_once 'conexao.php'; //inclusao do arq conexo no sistema
 //   unset($_SESSION['senha']);
 // }
 
-$sql="SELECT * FROM professores ORDER BY nome ASC"; // mostra todos os alunos em ordem crescente
+$sql="SELECT * FROM professores ORDER BY nome ASC";
+// mostra todos os alunos em ordem crescente
 $resultado = $conexao->query($sql); // executa a consulta do banco.
+
 ?>
+
+<?php
+
+if(!empty($_GET['search'])){
+  $search=$_GET['search'];
+  $sql="SELECT * FROM professores WHERE nome LIKE '%search%' ORDER BY nome ASC";
+}else{
+  $sql="SELECT * FROM professores ORDER BY nome ASC";
+   // mostra todos os alunos em ordem crescente
+}
+
+$resultado = $conexao->query($sql);
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,17 +46,22 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
   <title>Cadastro de Senha</title>
   <style>
 
-    header h1{
+    header h1 {
       font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
       font-weight: 600;
       color: orange;
+      display: flex;
     }
+    .form-inline{
+      display: flex;
+      gap: 10px; 
+    }
+
     .topo {
       color: white;
       display: flex;
-      justify-content: space-around;
-
-
+      justify-content: space-evenly;
+      gap: 50px;
     }
 
     body {
@@ -59,8 +81,8 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
       border-radius: 10px;
       padding: 20px;
       width: auto;
-      display: flex;
-      justify-content: space-around;
+      /* display: flex; */
+      /* justify-content: space-around; */
     }
     .table{
       color: white;
@@ -86,20 +108,24 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
   </header>
   <main>
     <section class="box">
+       <form class="form-inline" action="lista_prof.php" method="GET">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-warning my-2 my-sm-0" type="submit" name="submit">Search</button>
+      </form>
       
     <!-- <h1>Aguarde Site em Construção ⛑ 🚧 🏗</h1> -->
     <table class="table">
-  <thead class="thead-light">
-    <tr>
-      <!-- <th scope="col">ID</th> -->
-      <th scope="col">Nome</th>
-      <th scope="col">nivel</th>
-      <th scope="col">data_admissao</th>
-      <th scope="col">genero</th>
-      <th scope="col">disciplina</th>
-     </tr>
-  </thead>
-  <tbody>
+      <thead class="thead-light">
+        <tr>
+          <!-- <th scope="col">ID</th> -->
+          <th scope="col">Nome</th>
+          <th scope="col">nivel</th>
+          <th scope="col">data_admissao</th>
+          <th scope="col">genero</th>
+          <th scope="col">disciplina</th>
+        </tr>
+      </thead>
+      <tbody>
     <?php
 
       while ($professores=mysqli_fetch_assoc($resultado)){ //Quebra toda a variavel. Usada para grande estruturas.
@@ -116,9 +142,11 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
 
     ?>
 
-  </tbody>
-</table>
+        </tbody>
+     </table>
+   
     </section>
+
   </main>
   
 </body>
