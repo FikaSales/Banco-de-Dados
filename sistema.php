@@ -124,6 +124,7 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
     <?php
 
       while ($alunos=mysqli_fetch_assoc($resultado)){ //Quebra toda a variavel. Usada para grande estruturas.
+        //mysqli_fetch_assoc (uma linha) e mysqli_fetch_assoc (+ de uma linha).
         echo "<tr>";
           // echo"<td>".$alunos['id']."</td>";
           echo"<td>".ucfirst($alunos['nome'])."</td>";
@@ -133,7 +134,7 @@ $resultado = $conexao->query($sql); // executa a consulta do banco.
           echo"<td>".$alunos['data_nasc']."</td>";
           echo"<td>".$alunos['escolaridade']."</td>";
           echo"<td>".$alunos['telefone']."</td>";
-          echo"<td><a class='btn btn-sm btn-warning' href='edit.php?id=$alunos[id]'><img src='imagens/pencil-fill.svg'>"."</a></td>";
+          echo"<td><a class='btn btn-sm btn-warning' href='edit.php?id=$alunos[id]'><img src='imagens/pencil-fill.svg'>"."</a></td>"; //hrerf -> manda pra pagina indicada // ?id= -> passagem de parametro pelo metodo quare string(pesquisar assim).
           echo"<td><a class='btn btn-sm btn-danger' href='delete.php?id=$alunos[id]'><img src='imagens/trash-fill.svg'>"."</a></td>";
           
         echo "</tr>";
